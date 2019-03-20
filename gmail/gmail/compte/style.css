@@ -1,0 +1,97 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(fond.jpeg)
+}
+.retour{
+    text-decoration: none;
+    color: blue;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.conteneur{
+    width: 100%;
+    text-align: center;
+    margin: 20px auto 25px;
+}
+.page{
+    border-radius: 5px;
+    padding-top: 20px; 
+    height: 250px;
+    width: 80%;
+    margin-top: 40px; 
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color:  rgb(252, 252, 252);
+}
+.left{
+    width: 50%;
+    float: left;
+    padding: 5px;
+    padding-right: 12%;
+    padding-left: 0; 
+    border-right: 1px solid black;
+}
+.right{
+    width: 50%;
+    float: right;
+    padding-right: 12%;
+    padding-left: 5%; 
+    padding: 5px;
+    border-left: 1px solid black;
+}
+.form-group{
+    font-size: 17px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.button{
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+    height: 30px;
+    margin-top: 20px;
+    background-color: rgb(236, 168, 58);
+    color: white;
+    border: 1px solid rgb(236, 168, 58);
+}
+.button:hover{
+    background-color: #df8c07;
+    transition: 0.5s;
+}
+.input1{
+    float: right;
+    height: 23px;
+    border-radius: 2px;
+    border: 0.5px solid black;
+}
+.input1:hover{
+    box-shadow: 1px 1px 1px 1px #555;
+}
+.input2:hover{
+    box-shadow: 1px 1px 1px 1px #555;
+}
+.input2{
+    float: right;
+    height: 23px;
+    border-radius: 2px;
+    border: 0.5px solid black;
+}
+.titre{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0; 
+    color:white;
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+.hr{
+    height: 3px;
+    width: 300px;
+    background-color: tomato;
+}
