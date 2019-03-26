@@ -3,7 +3,7 @@ var connection=mysql.createConnection({
   host:'localhost',
   user:'root',
   password:'',
-  database:'profil'
+  database:'aliment'
 });
 connection.connect(function(error){
   if(!!error){
