@@ -1,7 +1,15 @@
 const express = require('express')
 const app = express()
 const path = require ('path')
+const bodyPaser = require('body-paser')
+const expressValidator = require('express-validator')
 var connection = require("../ALIMEN-master/data/database")
+
+
+app.use(expressValidator())
+app.use(bodyPaser.json())
+app.use(bodyPaser.urlencoded  ({extended :true}))
+
 app.set('views', path.join(__dirname, 'VIEW'));
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'));
@@ -26,6 +34,9 @@ app.get('/', function(req, res) {
     res.render("joni");
   });
   app.get('/mail', function(req, res) {
+    res.render("mail");
+  });
+  app.post('/mail', function(req, res) {
     res.render("mail");
   });
   app.get('/password', function(req, res) {
