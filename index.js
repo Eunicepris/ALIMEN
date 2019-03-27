@@ -1,13 +1,17 @@
 const express = require('express')
 const app = express()
 const path = require ('path')
+const expressFlash = require('express-flash')
+const expressSession = require('express-session')
 const bodyParser = require('body-parser')
 const { check } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const expressValidator = require ('express-validator')
-var connection = require("../ALIMEN-master/data/database")
+var connection = require("./data/database")
 
 
+
+app.use(expressFlash())
 app.use(expressValidator())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded  ({extended :true}))
@@ -62,7 +66,7 @@ app.set('view engine', 'ejs')
     res.render("password"); 
   });
    app.post('/alimant/connexion/password', function (req, res) {
-     connection.query('INSERT INTO utilisateurs(password) VALUES(?)', [req.body.password], function(err, result){
+     connection.query('SELECT utilisateurs(password) VALUES(?)', [req.body.password], function(err, result){
        if(err){
          console.log(err.message)
        }
