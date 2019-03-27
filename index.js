@@ -30,7 +30,7 @@ app.set('view engine', 'ejs')
     res.render("index");
     console.log(req.body)
 
-    let values = [req.body.name, req.body.email, req.body.password, req.body.lastname, req.body.phone,req.body.passwordconfirm ]
+    
      
     
     traitementForm(function(req, res, next)
@@ -59,12 +59,28 @@ app.set('view engine', 'ejs')
 
   // route des utilisateurs //
   app.get('/alimant/connexion/password', function(req, res) {
-    res.render("password");
+    res.render("password"); 
   });
+   app.post('/alimant/connexion/password', function (req, res) {
+     connection.query('INSERT INTO utilisateurs(password) VALUES(?)', [req.body.password], function(err, result){
+       if(err){
+         console.log(err.message)
+       }
+       else res.redirect('/alimant/connexion/password/ahiline')
+     })
+   })
 
   app.get('/alimant/connexion/mail', function(req, res) {
     res.render("mail");
   });
+  app.post('/alimant/connexion/mail', function (req, res) {
+    connection.query('INSERT INTO utilisateurs(email) VALUES(?)', [req.body.email], function(err, result){
+      if(err){
+        console.log(err.message)
+      }
+      else res.redirect('/alimant/connexion/mail')
+    })
+  })
 
   app.get('/alimant/inscription', function(req, res) {
     res.render("inscription");
