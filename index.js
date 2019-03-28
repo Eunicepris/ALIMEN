@@ -5,7 +5,7 @@ const path = require ('path');
 
 const expressFlash = require('express-flash');
 
-const expressSession = require('express-session');
+const session = require('express-session');
 
 // const session = require('session');
 const bodyParser = require('body-parser');
@@ -16,25 +16,26 @@ const expressValidator = require ('express-validator');
 
 const flashConnect =  require('connect-flash');
 
-const cookiesParser =  require('cookie-parser');
+// const cookiesParser =  require('cookie-parser');
 
 const passport = ('passport');
 
-const creatError = ('http-error')
+// const creatError = ('http-error')
 
 const mysql = require('mysql');
 var connection = require("./data/database");
-const app = express();
+const app = express()
 
 
-
-// app.use(session({
-//   secret: 'jamoinudbctybzggdho896557566320236spmmqhgduyeyauooejdghvgsfqgkpml',
-//   resave: true,
-//   saveUninitialized: true
-// }));
-
-
+ app.use(session({
+  secret: 'ghdyudodgsgfyuej5968',
+  resave: true,
+  saveUninitialized: true
+})
+ )
+// app.use(passport.initialize())
+// app.use(passport.session())
+app.use(flashConnect())
 app.use(expressFlash())
 app.use(expressValidator())
 app.use(bodyParser.json())
@@ -57,65 +58,31 @@ app.set('view engine', 'ejs')
   app.post('/', function(req, res, next) {
     res.render("index");
     console.log(req.body)
-
-    
-     
-    
-  //   function traitementForm(err, req, res, next)
-  //   {
-  //     check('email').isEmail(),
-  //   check('password').isLength({ min: 5 }),
-
-  //   check('name').isLength({ min:2 }),
-  //   check('lastname').isLength({ min:2 }),
-
-  //   check('phone').isLength({ min:8,max:8 }),
-
-  //   check("password", "invalid password")
-  //    .isLength({ min: 5 })
-  //    .custom((value,{req, loc, path}) => {
-  //       if (value !== req.body.passwordconfirm) {
-  //           // trow error if passwords do not match
-  //           throw new Error("Passwords don't match");
-  //       } else {
-  //           return value;
-  //       }
-  //   })
-  //   }
-  // });
-
-  // route des utilisateurs //
+  });
   app.get('/alimant/connexion/password', function(req, res) {
-    res.render("password"); 
-  });
-   app.post('/alimant/connexion/password', function (req, res) {
-     connection.query('SELECT utilisateurs(password) VALUES(?)', [req.body.password], function(err, result){
-       if(err){
-         console.log(err.message)
-       }
-       else res.redirect('/alimant/connexion/password/ahiline')
-     })
-   })
-
-  app.get('/alimant/connexion/mail', function(req, res) {
-    res.render("mail");
-  });
-  app.post('/alimant/connexion/mail', function (req, res) {
-    connection.query('INSERT INTO utilisateurs(email) VALUES(?)', [req.body.email], function(err, result){
-      if(err){
-        console.log(err.message)
-      }
-      else res.redirect('/alimant/connexion/mail')
-    })
+    res.render("password")
   })
 
-  app.get('./alimant/inscription', function(req, res) {
+  app.get('/alimant/connexion/mail', function(req, res) {
+    res.render("mail")
+  })
+
+  app.get('/alimant/inscription', function(req, res) {
     res.render("inscription");
   });
 
   app.post('/alimant/inscription', function(err, req, res, next){
-    function traitementForm(err, req, res, next)
-    {
+    connection.query('INSERT INTO utilisateurs(name, email, password, lastname, phone, passwordconfirm) VALUES(?, ?, ?, ?, ?, ?)', 
+    [req.body.name, req.body.email, req.body.password, req.body.lastname, req.body.phone, req.body.passwordconfirm], function(err, result){
+         if(err){
+           console.log(err.message)
+         }
+         else
+         {
+           res.redirect('/alimant/connexion')
+         }
+    })
+
       check('email').isEmail(),
     check('password').isLength({ min: 5 }),
 
@@ -134,19 +101,10 @@ app.set('view engine', 'ejs')
             return value;
         }
     })
-    }
   })
-    connection.query('INSERT INTO utilisateurs(name, email, password, lastname, phone, passwordconfirm) VALUES(?, ?, ?, ?, ?, ?)', 
-    [req.body.name, req.body.email, req.body.password, req.body.lastname, req.body.phone, req.body.passwordconfirm], function(err, result){
-         if(err){
-           console.log(err.message)
-         }
-         else
-         {
-           res.redirect('/alimant/connexion/mail')
-         }
-    })
-  })
+  
+   
+  
 
  
   app.get('/ahiline', function(req, res) {
